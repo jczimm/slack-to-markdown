@@ -16,6 +16,19 @@ const markdown = slackToMarkdown(clipboardData);
 slackToMarkdown("plain text") // => "plain text"
 ```
 
+### Browser clipboard example
+
+```typescript
+document.addEventListener("paste", (e) => {
+  const slackData = e.clipboardData?.getData("slack/texty");
+  if (slackData) {
+    e.preventDefault();
+    const markdown = slackToMarkdown(slackData);
+    // Insert markdown at cursor, or do whatever you want with it
+  }
+});
+```
+
 ## Running tests
 Requires Node.js 22+:
 

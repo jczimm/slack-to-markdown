@@ -1,6 +1,6 @@
 import { describe, it } from "node:test";
 import assert from "node:assert";
-import { slackToMarkdown } from "./slackDeltaToMarkdown.ts";
+import { slackToMarkdown } from "./slackToMarkdown.ts";
 
 const tests: { name: string; input: object; expected: string }[] = [
   // === INLINE FORMATTING ===
