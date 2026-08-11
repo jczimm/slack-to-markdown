@@ -49,6 +49,14 @@ The package also installs `slack-paste`, which reads Slack's clipboard format of
 slack-paste | slack-to-markdown
 ```
 
+Without a global install, hand npx a shell so both commands resolve from a single package install:
+
+```bash
+npx -p @jczimm/slack-to-markdown sh -c 'slack-paste | slack-to-markdown'
+```
+
+The pipe has to stay inside the quotes — outside them, your own shell takes it and pipes into a `slack-to-markdown` that isn't on `PATH`.
+
 **Copy the message, don't select the text.** Open the message's overflow menu (the **⋯** button) and press <kbd>⌘C</kbd>. Slack writes the `slack/texty` delta this tool reads only for a whole-message copy; drag-selecting the text and copying seems to come out as `slack/html` instead, which this tool doesn't handle.
 
 `pbpaste` can't be used here — it only reads the plain-text, RTF and PostScript flavors, so it hands you the flattened text with the formatting already gone. Slack's clipboard data lives in a custom flavor, which Chromium-based apps (both the desktop app and Slack in a browser) pack into an `org.chromium.web-custom-data` pasteboard blob. `slack-paste` reads that via `osascript` and unpacks it.
