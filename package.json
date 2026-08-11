@@ -1,6 +1,6 @@
 {
   "name": "@jczimm/slack-to-markdown",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Convert Slack's clipboard format to Slack-compatible Markdown",
   "type": "module",
   "exports": {
