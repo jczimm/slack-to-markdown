@@ -13,10 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # No registry-url: it makes setup-node write an _authToken line into .npmrc,
+      # and with no NODE_AUTH_TOKEN set that empty token reads to npm as "already
+      # authenticated", so it skips the OIDC exchange and the publish 404s.
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-          registry-url: https://registry.npmjs.org
       - run: npm ci
       - run: npm test
       - run: npm run build
