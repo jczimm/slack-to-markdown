@@ -68,6 +68,12 @@ slack-paste --list
 slack-paste slack/html
 ```
 
+### Example Shortcut (macOS)
+
+[`Normalize Slack Markdown in Clipboard.shortcut`](Normalize%20Slack%20Markdown%20in%20Clipboard.shortcut) wraps the pipeline above in a Shortcuts.app shortcut: it runs `slack-paste | slack-to-markdown` in a Run Shell Script action and puts the Markdown back on the clipboard, so you copy the message in Slack, run the shortcut, and paste. Double-click the file to add it to your Shortcuts library, then give it a keyboard shortcut or run it from Spotlight or the menu bar.
+
+Shortcuts runs shell scripts with a bare `PATH`, so if `npx` isn't found, edit the action to use the absolute path to your Node install (`which npx` will tell you where it is).
+
 ## Running tests
 Requires Node.js 22+:
 
