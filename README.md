@@ -7,7 +7,7 @@ When you copy formatted text from Slack, it stores the content in the `slack/tex
 ## Usage
 
 ```typescript
-import { slackToMarkdown } from "slack-to-markdown";
+import { slackToMarkdown } from "@jczimm/slack-to-markdown";
 
 // Pass the raw clipboard string - it handles parsing
 const markdown = slackToMarkdown(clipboardData);
@@ -27,6 +27,37 @@ document.addEventListener("paste", (e) => {
     // Insert markdown at cursor, or do whatever you want with it
   }
 });
+```
+
+## CLI
+
+Reads Slack's clipboard format on stdin, writes Markdown to stdout. Input that isn't valid Slack clipboard data is passed through unchanged.
+
+```bash
+npx @jczimm/slack-to-markdown < clip.json
+
+# installed globally
+npm install -g @jczimm/slack-to-markdown
+slack-to-markdown < clip.json
+```
+
+### slack-paste (macOS)
+
+The package also installs `slack-paste`, which reads Slack's clipboard format off the macOS pasteboard so you can pipe it straight in:
+
+```bash
+slack-paste | slack-to-markdown
+```
+
+**Copy the message, don't select the text.** Open the message's overflow menu (the **⋯** button) and press <kbd>⌘C</kbd>. Slack writes the `slack/texty` delta this tool reads only for a whole-message copy; drag-selecting the text and copying seems to come out as `slack/html` instead, which this tool doesn't handle.
+
+`pbpaste` can't be used here — it only reads the plain-text, RTF and PostScript flavors, so it hands you the flattened text with the formatting already gone. Slack's clipboard data lives in a custom flavor, which Chromium-based apps (both the desktop app and Slack in a browser) pack into an `org.chromium.web-custom-data` pasteboard blob. `slack-paste` reads that via `osascript` and unpacks it.
+
+It defaults to the `slack/texty` flavor. If a copy didn't produce that flavor, pass one explicitly or see what's actually on the clipboard:
+
+```bash
+slack-paste --list
+slack-paste slack/html
 ```
 
 ## Running tests

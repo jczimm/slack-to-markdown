@@ -1,6 +1,6 @@
 {
-  "name": "slack-to-markdown",
-  "version": "1.0.1",
+  "name": "@jczimm/slack-to-markdown",
+  "version": "1.1.0",
   "description": "Convert Slack's clipboard format to Slack-compatible Markdown",
   "type": "module",
   "exports": {
@@ -9,16 +9,27 @@
       "import": "./dist/slackToMarkdown.js"
     }
   },
+  "bin": {
+    "slack-to-markdown": "./dist/cli.js",
+    "slack-paste": "./dist/slackPaste.js"
+  },
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
+    "pretest": "npm run build",
     "test": "node --experimental-strip-types --test 'src/**/*.test.ts'",
     "build": "tsc"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cozmo/slack-to-markdown.git"
+    "url": "git+https://github.com/jczimm/slack-to-markdown.git"
   },
   "keywords": [
     "slack",
@@ -27,6 +38,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^22",
     "typescript": "^5.3.0"
   }
 }
