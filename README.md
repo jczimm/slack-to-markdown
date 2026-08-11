@@ -7,7 +7,7 @@ When you copy formatted text from Slack, it stores the content in the `slack/tex
 ## Usage
 
 ```typescript
-import { slackToMarkdown } from "slack-to-markdown";
+import { slackToMarkdown } from "@jczimm/slack-to-markdown";
 
 // Pass the raw clipboard string - it handles parsing
 const markdown = slackToMarkdown(clipboardData);
@@ -34,10 +34,10 @@ document.addEventListener("paste", (e) => {
 Reads Slack's clipboard format on stdin, writes Markdown to stdout. Input that isn't valid Slack clipboard data is passed through unchanged.
 
 ```bash
-npx slack-to-markdown < clip.json
+npx @jczimm/slack-to-markdown < clip.json
 
 # installed globally
-npm install -g slack-to-markdown
+npm install -g @jczimm/slack-to-markdown
 slack-to-markdown < clip.json
 ```
 
